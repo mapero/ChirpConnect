@@ -64,6 +64,7 @@ def main(argv):
         elif opt == "-h":
             host = arg
         elif opt == "-p":
+            print arg
             port = int(arg)
         elif opt == "--ssl":
             ssl=True
