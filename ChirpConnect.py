@@ -52,7 +52,7 @@ def main(argv):
     interval = 60
     
     try:
-        opts, args = getopt.getopt(argv, "bahpti", ["ssl"])
+        opts, args = getopt.getopt(argv, "b:a:h:p:t:i:", ["ssl"])
     except getopt.GetoptError:
        printOpt()
        sys.exit(2)
