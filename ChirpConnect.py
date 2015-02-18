@@ -33,11 +33,14 @@ class ChirpConnect:
         self.client.connect(self.mqtt_host, self.mqtt_port, 60, "")
         self.client.loop()
         starttime = time.time()
-        while(True):
-            self.publishLight()
-            self.publishMoisture()
-            self.publishTemp()
-            time.sleep(self.interval - ((time.time()-starttime) % self.interval))
+        try:
+            while(True):
+                self.publishLight()
+                self.publishMoisture()
+                self.publishTemp()
+                time.sleep(self.interval - ((time.time()-starttime) % self.interval))
+        except KeyboardInterrupt:
+            pass
         
 def printOpt():
     print "ChirpConnect -b <bus=1> -a <address=0x20> -h <host=localhost> -p <port=2337> --ssl -t <topic=sensors/Chirp> -i <interval=60>"
