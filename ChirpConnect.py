@@ -29,7 +29,7 @@ class ChirpConnect:
         self.client.publish(self.mqtt_topic + "light", self.chirp.light(), 0, False)
         
     def loop(self):
-        print "Connecting to "+self.mqtt_host+"on port "+self.mqtt_port
+        print "Connecting to "+self.mqtt_host+" on port "+ str(self.mqtt_port)
         self.client.connect(self.mqtt_host, self.mqtt_port, 60, "")
         self.client.loop()
         starttime = time.time()
@@ -58,19 +58,19 @@ def main(argv):
        sys.exit(2)
     for opt, arg in opts:
         if opt == "-b":
-            bus = arg
+            bus = int(arg)
         elif opt == "-a":
-            address = arg
+            address = int(arg)
         elif opt == "-h":
             host = arg
         elif opt == "-p":
-            port = arg
+            port = int(arg)
         elif opt == "--ssl":
             ssl=True
         elif opt == "-t":
             topic = arg
         elif opt == "-i":
-            interval = arg
+            interval = int(arg)
     chirpConnect = ChirpConnect(bus, address, host, port, ssl, topic, interval)
     chirpConnect.loop()
     
