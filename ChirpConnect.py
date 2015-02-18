@@ -30,6 +30,7 @@ class ChirpConnect:
         
     def loop(self):
         self.client.connect(self.mqtt_host, self.mqtt_port, 60, "")
+        self.client.loop()
         starttime = time.time()
         while(True):
             self.publishLight()
