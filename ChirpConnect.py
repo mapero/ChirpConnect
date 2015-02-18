@@ -41,6 +41,8 @@ class ChirpConnect:
                 time.sleep(self.interval - ((time.time()-starttime) % self.interval))
         except KeyboardInterrupt:
             pass
+        self.client.disconnect()
+        print "Exiting"
         
 def printOpt():
     print "ChirpConnect -b <bus=1> -a <address=0x20> -h <host=localhost> -p <port=2337> --ssl -t <topic=sensors/Chirp> -i <interval=60>"
