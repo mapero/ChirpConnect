@@ -20,13 +20,13 @@ class ChirpConnect:
         print("Connected with result code" + str(rc))
     
     def publishTemp(self):
-        self.client.publish(self.mqtt_topic + "temp", self.chirp.temp(), 0, False)
+        self.client.publish(self.mqtt_topic + "/temp", self.chirp.temp(), 0, False)
     
     def publishMoisture(self):
-        self.client.publish(self.mqtt_topic + "moisture", self.chirp.cap_sense(), 0, False)
+        self.client.publish(self.mqtt_topic + "/moisture", self.chirp.cap_sense(), 0, False)
         
     def publishLight(self):
-        self.client.publish(self.mqtt_topic + "light", self.chirp.light(), 0, False)
+        self.client.publish(self.mqtt_topic + "/light", self.chirp.light(), 0, False)
         
     def loop(self):
         print "Connecting to "+self.mqtt_host+" on port "+ str(self.mqtt_port)
@@ -64,7 +64,6 @@ def main(argv):
         elif opt == "-h":
             host = arg
         elif opt == "-p":
-            print arg
             port = int(arg)
         elif opt == "--ssl":
             ssl=True
