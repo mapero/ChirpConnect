@@ -15,7 +15,7 @@ class ChirpConnect:
         self.chirp = Chirp.Chirp(self.bus_num, self.bus_addr)
         self.client = mqtt.Client()
         self.client.on_connect = self.on_connect
-        self.client.on_publish = self.on_publish
+        self.client.on_publish = self.on_publish    
         logging.basicConfig(level=logging.DEBUG)
 
     
@@ -23,7 +23,7 @@ class ChirpConnect:
         logging.info("Connected with result code" + str(rc))
         
     def on_publish(self, client, userdata, mid):
-        logging.debug("Message " + str(mid) + "published to topic " + self.topic)
+        logging.debug("Message " + str(mid) + "published to topic")
     
     def publishTemp(self):
         temp = self.chirp.temp()
