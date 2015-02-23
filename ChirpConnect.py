@@ -28,25 +28,25 @@ class ChirpConnect:
     def publishTemp(self):
         temp = self.chirp.temp()
         logging.debug("Publishing " + self.mqtt_topic +"/temp with value: " +str(temp))
-        rc = self.client.publish(self.mqtt_topic + "/temp", temp, 1, False)
+        rc = self.client.publish(self.mqtt_topic + "/temp", temp, 0, False)
         logging.debug(str(rc))
     
     def publishMoisture(self):
         moisture = self.chirp.cap_sense()
         logging.debug("Publishing " + self.mqtt_topic +"/moisture with value: " +str(moisture))
-        rc = self.client.publish(self.mqtt_topic + "/moisture", moisture, 1, False)
+        rc = self.client.publish(self.mqtt_topic + "/moisture", moisture, 0, False)
         logging.debug(str(rc))
         
     def publishLight(self):
         light = self.chirp.light()
         logging.debug("Publishing " + self.mqtt_topic +"/light with value: "+str(light))
-        rc = self.client.publish(self.mqtt_topic + "/light", light, 1, False)
+        rc = self.client.publish(self.mqtt_topic + "/light", light, 0, False)
         logging.debug(str(rc))
         
     def loop(self):
         logging.info("Connecting to "+self.mqtt_host+" on port "+ str(self.mqtt_port))
         self.client.connect(self.mqtt_host, self.mqtt_port, 60, "")
-        self.client.loop()
+        self.client.loop_start()
         starttime = time.time()
         try:
             while(True):
