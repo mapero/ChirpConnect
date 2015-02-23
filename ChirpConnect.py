@@ -20,6 +20,9 @@ class ChirpConnect:
     
     def on_connect(self, client, userdata, flag, rc):
         logging.info("Connected with result code" + str(rc))
+        
+    def on_publish(self, client, userdata, mid):
+        logging.debug("Message " + str(mid) + "published to topic " + self.topic)
     
     def publishTemp(self):
         temp = self.chirp.temp()
