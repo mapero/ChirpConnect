@@ -22,16 +22,22 @@ class ChirpConnect:
         logging.info("Connected with result code" + str(rc))
     
     def publishTemp(self):
-        logging.debug("Publishing " + self.mqtt_topic +"/temp")
-        self.client.publish(self.mqtt_topic + "/temp", self.chirp.temp(), 0, False)
+        temp = self.chirp.temp()
+        logging.debug("Publishing " + self.mqtt_topic +"/temp with value: " +str(temp))
+        rc = self.client.publish(self.mqtt_topic + "/temp", temp, 0, False)
+        logging.debug(str(rc))
     
     def publishMoisture(self):
-        logging.debug("Publishing " + self.mqtt_topic +"/moisture")
-        self.client.publish(self.mqtt_topic + "/moisture", self.chirp.cap_sense(), 0, False)
+        moisture = self.chirp.cap_sense()
+        logging.debug("Publishing " + self.mqtt_topic +"/moisture with value: " +str(moisture))
+        rc = self.client.publish(self.mqtt_topic + "/moisture", moisture, 0, False)
+        logging.debug(str(rc))
         
     def publishLight(self):
-        logging.debug("Publishing " + self.mqtt_topic +"/light")
-        self.client.publish(self.mqtt_topic + "/light", self.chirp.light(), 0, False)
+        light = self.chirp.light()
+        logging.debug("Publishing " + self.mqtt_topic +"/light with value: "+str(light))
+        rc = self.client.publish(self.mqtt_topic + "/light", light, 0, False)
+        logging.debug(str(rc))
         
     def loop(self):
         logging.info("Connecting to "+self.mqtt_host+" on port "+ str(self.mqtt_port))
