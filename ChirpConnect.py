@@ -15,6 +15,7 @@ class ChirpConnect:
         self.chirp = Chirp.Chirp(self.bus_num, self.bus_addr)
         self.client = mqtt.Client()
         self.client.on_connect = self.on_connect
+        self.client.on_publish = self.on_publish
         logging.basicConfig(level=logging.DEBUG)
 
     
