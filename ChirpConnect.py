@@ -1,6 +1,7 @@
 import Chirp, getopt
 import paho.mqtt.client as mqtt
 import sys, time
+import logging
 
 class ChirpConnect:
     def __init__(self, bus=1, addr=0x20, host="localhost", port=2337, ssl=True, topic="sensors/Chirp", interval=60):
@@ -17,19 +18,22 @@ class ChirpConnect:
 
     
     def on_connect(self, client, userdata, flag, rc):
-        print("Connected with result code" + str(rc))
+        logging.info("Connected with result code" + str(rc))
     
     def publishTemp(self):
+        logging.debug("Publishing " + self.mqtt_topic +"/temp")
         self.client.publish(self.mqtt_topic + "/temp", self.chirp.temp(), 0, False)
     
     def publishMoisture(self):
+        logging.debug("Publishing " + self.mqtt_topic +"/moisture")
         self.client.publish(self.mqtt_topic + "/moisture", self.chirp.cap_sense(), 0, False)
         
     def publishLight(self):
+        logging.debug("Publishing " + self.mqtt_topic +"/light")
         self.client.publish(self.mqtt_topic + "/light", self.chirp.light(), 0, False)
         
     def loop(self):
-        print "Connecting to "+self.mqtt_host+" on port "+ str(self.mqtt_port)
+        logging.info("Connecting to "+self.mqtt_host+" on port "+ str(self.mqtt_port))
         self.client.connect(self.mqtt_host, self.mqtt_port, 60, "")
         self.client.loop()
         starttime = time.time()
@@ -42,7 +46,7 @@ class ChirpConnect:
         except KeyboardInterrupt:
             pass
         self.client.disconnect()
-        print "Exiting"
+        logging.info("Exiting")
         
 def printOpt():
     print "ChirpConnect -b <bus=1> -a <address=0x20> -h <host=localhost> -p <port=2337> --ssl -t <topic=sensors/Chirp> -i <interval=60>"
